@@ -1,0 +1,98 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Plano de Contas</h1>
+</div>
+
+<div class="container">
+    <div>
+        <div class="btn-group" role="group">
+            <a class="nav-link" routerLink="../">
+                <span data-feather="home"></span>Voltar
+            </a>
+            <a class="nav-link" routerLink="novo">
+                <span data-feather="home"></span>Mapear Plano de Contas das Filiais
+            </a>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-sm table-hover" style="cursor: pointer">
+            <thead>
+                <th>Código</th>
+                <th>Descrição</th>
+                <th>Conta Pai</th>
+            </thead>
+            <tbody>
+                <tr *ngFor='let item of planoContas;' [class.text-primary]="item.contaAnalitica"
+                    [class.text-secondary]="!item.contaAnalitica"
+                    [class.text-info]="item.contaAnalitica && item.lancarPorCentroCustos" (click)="editar(item)"
+                    data-bs-toggle="modal" data-bs-target="#modalConta">
+                    <td style="width: 160px;">{{item.codigo}}</td>
+                    <td>{{item.descricao}}</td>
+                    <td>{{item.contaPai}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal Contabilizações -->
+<div class="modal fade" id="modalConta" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="modalContaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalContaLabel">Editar Conta</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-2">
+                    <div class="col-2">
+                        <label class="form-label">Código</label>
+                        <input type="text" class="form-control" [(ngModel)]="contaAtual.codigo">
+                    </div>
+                    <div class="col">
+                        <label class="form-label">Descrição</label>
+                        <input type="text" class="form-control" [(ngModel)]="contaAtual.descricao">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3">
+                        <label class="form-label">Natureza da Conta</label>
+                        <select class="form-select" [(ngModel)]="contaAtual.codigoNatureza">
+                            <option value="">Selecione</option>
+                            <option value="01">Contas de Ativo</option>
+                            <option value="02">Contas de Passivo</option>
+                            <option value="03">Patrimônio Líquido</option>
+                            <option value="04">Contas de Resultado</option>
+                            <option value="05">Contas de Compensação</option>
+                            <option value="09">Outras</option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <label class="form-label">Tipo</label>
+                        <select class="form-select" [(ngModel)]="contaAtual.contaAnalitica">
+                            <option value="false">Sintética</option>
+                            <option value="true">Analítica</option>
+                        </select>
+                    </div>
+                    <div class="col-1">
+                        <label class="form-label">Nível</label>
+                        <input type="text" class="form-control" [(ngModel)]="contaAtual.nivel">
+                    </div>
+                    <div class="col-3">
+                        <label class="form-label"></label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="contaAtual.lancarPorCentroCustos" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Lançar por Centro de Custos
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>

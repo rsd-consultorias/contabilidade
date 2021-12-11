@@ -1,0 +1,214 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Indicadores Financeiros</h1>
+    <h6>Última atualização {{balancoPatrimonial.atualizacao | date:'dd/MM/yyyy hh:mm:ss'}}</h6>
+</div>
+
+<div id="carouselExampleIndicators" class="carousel slide carousel-dark" data-bs-ride="carousel">
+    <div class="carousel-indicators p-0 m-0">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+            aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+            aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+            aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="row row-cols-1 row-cols-2 g-1">
+                <div class="col">
+                    <div class="card mb-3 border-success" style="max-width: 540px;">
+                        <div class="row g-0" style="height: 100px">
+                            <div class="col-4 align-middle text-center h1 text-success" style="margin: auto;">
+                                {{balancoPatrimonial.indicadores.liquidezCorrente | formatarNumero}}
+                            </div>
+                            <div class="col-8">
+                                <div class="card-body">
+                                    <h4 class="card-title">Liquidez Corrente</h4>
+                                    <p class="card-text">Mede a capacidade de pagamento no curto prazo</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card mb-3 border-success" style="max-width: 540px;">
+                        <div class="row g-0" style="height: 100px">
+                            <div class="col-4 align-middle text-center h1 text-success" style="margin: auto;">
+                                {{balancoPatrimonial.indicadores.endividamentoTotal | formatarNumero}}%
+                            </div>
+                            <div class="col-8">
+                                <div class="card-body">
+                                    <h4 class="card-title">Endividamento Total</h4>
+                                    <p class="card-text">Mede a proporção das obrigações em relação ao Ativo Total</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="row row-cols-1 row-cols-2 g-1">
+                <div class="col">
+                    <div class="card mb-3 border-success" style="max-width: 540px;">
+                        <div class="row g-0" style="height: 100px">
+                            <div class="col-4 align-middle text-center h1 text-success" style="margin: auto;">
+                                {{balancoPatrimonial.indicadores.liquidezCorrente | formatarNumero}}
+                            </div>
+                            <div class="col-8">
+                                <div class="card-body">
+                                    <h4 class="card-title">Liquidez Corrente</h4>
+                                    <p class="card-text">Mede a capacidade de pagamento no curto prazo</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card mb-3 border-success" style="max-width: 540px;">
+                        <div class="row g-0" style="height: 100px">
+                            <div class="col-4 align-middle text-center h1 text-success" style="margin: auto;">
+                                {{balancoPatrimonial.indicadores.endividamentoTotal | formatarNumero}}%
+                            </div>
+                            <div class="col-8">
+                                <div class="card-body">
+                                    <h4 class="card-title">Endividamento Total</h4>
+                                    <p class="card-text">Mede a proporção das obrigações em relação ao Ativo Total</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="row row-cols-1 row-cols-2 g-1">
+                <div class="col">
+                    <div class="card mb-3 border-success" style="max-width: 540px;">
+                        <div class="row g-0" style="height: 100px">
+                            <div class="col-4 align-middle text-center h1 text-success" style="margin: auto;">
+                                {{balancoPatrimonial.indicadores.liquidezCorrente | formatarNumero}}
+                            </div>
+                            <div class="col-8">
+                                <div class="card-body">
+                                    <h4 class="card-title">Liquidez Corrente</h4>
+                                    <p class="card-text">Mede a capacidade de pagamento no curto prazo</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card mb-3 border-success" style="max-width: 540px;">
+                        <div class="row g-0" style="height: 100px">
+                            <div class="col-4 align-middle text-center h1 text-success" style="margin: auto;">
+                                {{balancoPatrimonial.indicadores.endividamentoTotal | formatarNumero}}%
+                            </div>
+                            <div class="col-8">
+                                <div class="card-body">
+                                    <h4 class="card-title">Endividamento Total</h4>
+                                    <p class="card-text">Mede a proporção das obrigações em relação ao Ativo Total</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button> -->
+</div>
+
+<!-- <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> -->
+<br />
+<h2>Balanço Patrimonial</h2>
+<div class="row">
+    <div class="col-6">
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th style="width: 15%;">Conta</th>
+                    <th></th>
+                    <th class="text-right" style="width: 30%;">Saldo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let conta of balancoPatrimonial.ativo;">
+                    <tr *ngIf="conta.nivel <= nivelBalancoPatrimonial">
+                        <td>{{conta.codigo}}</td>
+                        <td>{{conta.descricao | uppercase}}</td>
+                        <td class="text-right">{{conta.saldo!.saldo | formatoSaldoContabil}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-6">
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th style="width: 15%;">Conta</th>
+                    <th></th>
+                    <th class="text-right" style="width: 30%;">Saldo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let conta of balancoPatrimonial.passivo;">
+                    <tr *ngIf="conta.nivel <= nivelBalancoPatrimonial">
+                        <td>{{conta.codigo}}</td>
+                        <td>{{conta.descricao | uppercase}}</td>
+                        <td class="text-right" style="width: 30%;">{{conta.saldo!.saldo | formatoSaldoContabil}}</td>
+                    </tr>
+                </ng-container>
+                <tr>
+                    <td colspan="3">&nbsp;</td>
+                </tr>
+                <ng-container *ngFor="let conta of balancoPatrimonial.patrimonioLiquido;">
+                    <tr *ngIf="conta.nivel <= nivelBalancoPatrimonial">
+                        <td>{{conta.codigo}}</td>
+                        <td>{{conta.descricao | uppercase}}</td>
+                        <td class="text-right" style="width: 30%;">{{conta.saldo!.saldo | formatoSaldoContabil}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<h2>Contas de Resultado</h2>
+<div class="row">
+    <div class="col-6">
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th style="width: 15%;">Conta</th>
+                    <th></th>
+                    <th class="text-right" style="width: 30%;">Saldo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let conta of balancoPatrimonial.contaResultado;">
+                    <tr *ngIf="conta.nivel <= nivelBalancoPatrimonial">
+                        <td>{{conta.codigo}}</td>
+                        <td>{{conta.descricao | uppercase}}</td>
+                        <td class="text-right">{{conta.saldo!.saldo | formatoSaldoContabil}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-6">
+    </div>
+</div>

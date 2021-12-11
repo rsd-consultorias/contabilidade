@@ -1,0 +1,157 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Movimentos Contábeis</h1>
+</div>
+
+<div class="container">
+    <div>
+        <div class="btn-group" role="group">
+            <a class="nav-link" routerLink="novo">
+                <span data-feather="home"></span>Novo lançamento
+            </a>
+            <a class="nav-link" routerLink="novo">
+                <span data-feather="home"></span>Reclassificar
+            </a>
+            <a class="nav-link" routerLink="novo">
+                <span data-feather="home"></span>Excluir lote
+            </a>
+            <a class="nav-link" routerLink="novo">
+                <span data-feather="home"></span>Encerramento
+            </a>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-sm table-hover" style="cursor: pointer">
+            <thead>
+                <th class="col-1">Data</th>
+                <th class="col-3">Lote</th>
+                <th class="col-5">Histórico</th>
+                <th>Complemento</th>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let mov of movimento">
+                    <tr (click)='detalhe(mov)' data-bs-toggle="modal" data-bs-target="#modalConta">
+                        <td>{{mov.data | formatoData}}</td>
+                        <td>{{mov.codigoLote}} - {{mov.descricaoLote}}</td>
+                        <td>{{mov.historico}}</td>
+                        <td>{{mov.complemento}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination" style="cursor: pointer;">
+                <li class="page-item" [ngClass]="{disabled: paginaAtual==1}"><a class="page-link"
+                        (click)="avancar(-1)">Anterior</a></li>
+                <li *ngFor='let i of quantidadePaginas; let pagina = index;' class="page-item"
+                    [ngClass]="{active: paginaAtual===i}"><a class="page-link" (click)="navegar(pagina + 1)">{{i}}</a>
+                </li>
+                <li class="page-item" [ngClass]="{disabled: paginaAtual==quantidadePaginas.length}"><a class="page-link"
+                        (click)="avancar(1);">Próximo</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Modal Contabilizações -->
+    <div class="modal fade" id="modalConta" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modalContaLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalContaLabel">Detalhar Lançamento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="row m-2">
+                    <div class="col-2">
+                        <label for="inputEmail4" class="form-label">Data</label>
+                        <input type="text" class="form-control" [disabled]="true"
+                            value="{{contabilizacaoAtual.data | date:'dd/MM/yyyy'}}">
+                    </div>
+                    <div class="col-2">
+                        <label for="inputEmail4" class="form-label">Código do Lançamento</label>
+                        <input type="text" class="form-control text-right" [disabled]="true"
+                            [(ngModel)]="contabilizacaoAtual.codigo">
+                    </div>
+                    <div class="col">
+                        <label for="inputEmail4" class="form-label">Lote</label>
+                        <select class="form-select" [(ngModel)]="contabilizacaoAtual.codigoLote">
+                            <option *ngFor="let lote of lotes" value="{{lote.codigo}}">
+                                {{lote.codigo}} {{lote.descricao}}</option>
+                        </select>
+                    </div>
+                    <div class="col-5">
+                        <label for="inputEmail4" class="form-label">Protocolo da Transação</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" [disabled]="true"
+                                value="a6b96a64-9b44-4382-afaf-914ea0f1749a">
+                            <button class="btn btn-outline-secondary" type="button">Detalhe</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-2">
+                    <div class="col-12">
+                        <label for="inputEmail4" class="form-label">Histórico</label>
+                        <input type="text" class="form-control" [(ngModel)]="contabilizacaoAtual.historico">
+                    </div>
+                </div>
+                <div class="row m-2">
+                    <div class="col-12">
+                        <label for="inputEmail4" class="form-label">Complemento</label>
+                        <input type="text" class="form-control" [(ngModel)]="contabilizacaoAtual.complemento">
+                    </div>
+                </div>
+                <div class="modal-body overflow-scroll" style="height: 250px;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="col-5">Conta</th>
+                                <th scope="col" class="text-right">Valor</th>
+                                <th scope="col" class="text-center col-1">Natureza</th>
+                                <th scope="col" class="col-4">Centro de Custos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let evento of contabilizacaoAtual.contabilizacao;"
+                                [class.text-primary]="evento.natureza == 'D'"
+                                [class.text-danger]="evento.natureza == 'C'">
+                                <td style="width: 440px">
+                                    <select class="form-select" [(ngModel)]="evento.conta">
+                                        <option *ngFor="let conta of planoContas" value="{{conta.codigo}}"
+                                            [disabled]="!conta.contaAnalitica">
+                                            {{conta.codigo}} {{conta.descricao}}</option>
+                                    </select>
+                                </td>
+                                <td class="text-right col-2">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control text-right"
+                                            [ngModel]="evento.valor!.formatado | formatarNumero"
+                                            (ngModelChange)="evento.valor.formatado=$event" appSomenteNumero>
+                                        <span class="input-group-text">{{evento.valor!.moeda}}</span>
+                                    </div>
+                                </td>
+                                <td style="width: 60px" class="text-center">
+                                    <select class="form-select" [(ngModel)]="evento.natureza">
+                                        <option value="D">D Débito</option>
+                                        <option value="C">C Crédito</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-select" [(ngModel)]="evento.centroCustos">
+                                        <option *ngFor="let centroCustos of centrosCustos"
+                                            value="{{centroCustos.codigo}}">
+                                            {{centroCustos.codigo}} {{centroCustos.descricao}}</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" (click)="excluir()" class="btn btn-danger"
+                        data-bs-dismiss="modal">Excluir</button>
+                    <button type="button" (click)="salvar()" class="btn btn-primary"
+                        data-bs-dismiss="modal">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,6 @@
+{
+    "realm": "mercatorum-contabilidade",
+    "bearer-only": false,
+    "auth-server-url": "http://localhost:8080/auth",
+    "resource": "contabilidade-api"
+  }

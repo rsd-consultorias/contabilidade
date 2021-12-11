@@ -1,0 +1,118 @@
+<div class="m-3 border-bottom">
+    <div class="row">
+        <div class="col">
+            <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
+                aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                    <li class="breadcrumb-item"><a [routerLink]="['../']">Voltar</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Novo Lançamento</li>
+                    <li class="breadcrumb-item" aria-current="page"><a (click)="salvar()" href="#">Salvar</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a (click)="salvar()" href="#">Salvar e Criar
+                            Novo</a></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-2">
+            <label for="inputEmail4" class="form-label">Data</label>
+            <div class="input-group">
+                <span class="input-group-text">2021-11</span>
+                <select class="form-select text-right">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+        <div class="col-3">
+            <label for="inputEmail4" class="form-label">Lote</label>
+            <select class="form-select">
+                <option></option>
+            </select>
+        </div>
+        <div class="col">
+            <label for="inputEmail4" class="form-label">Histórico</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="inputCodigoOrigem">
+                <button class="btn btn-outline-secondary" type="button">Pesquisar</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <label for="inputEmail4" class="form-label">Complemento</label>
+            <input type="text" class="form-control">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <table class="table table-sm table-hover" style="cursor: pointer">
+                <thead>
+                    <th style="width: 42px;"></th>
+                    <th>Conta</th>
+                    <th>Valor</th>
+                    <th>Natureza</th>
+                    <th>Centro de Custos</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <button class="page-link">+</button>
+                        </td>
+                        <td style="width: 280px;">
+                            <select class="form-select">
+                                <option></option>
+                            </select>
+                        </td>
+                        <td style="width: 220px;">
+                            <div class="input-group">
+                                <input type="text" class="form-control text-right">
+                                <span class="input-group-text"></span>
+                            </div>
+                        </td>
+                        <td style="width: 140px;">
+                            <select class="form-select">
+                                <option value="D">D Débito</option>
+                                <option value="C">C Crédito</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-select">
+                                <option></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 42px;">
+                            <button class="page-link">-</button>
+                        </td>
+                        <td>
+                            <select class="form-select">
+                                <option></option>
+                            </select>
+                        </td>
+                        <td style="width: 120px;" class="text-right">
+                            <div class="input-group">
+                                <input type="text" class="form-control text-right">
+                                <span class="input-group-text"></span>
+                            </div>
+                        </td>
+                        <td style="width: 80px;">
+                            <select class="form-select">
+                                <option value="D">D Débito</option>
+                                <option value="C">C Crédito</option>
+                            </select>
+                        </td>
+                        <td style="width: 260px;">
+                            <select class="form-select">
+                                <option></option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

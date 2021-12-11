@@ -1,0 +1,1 @@
+find './dist/contabilidade-frontend/browser' -name '*.js*' -exec sed -i -e 's,API_BASE_URL, "TESTE",g' {} \;

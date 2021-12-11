@@ -1,0 +1,272 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Nova Integração</h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="ol-1">
+            <button type="submit" class="btn btn-link" [routerLink]="['../']">Voltar para Integrações</button>
+        </div>
+        <div class="col"></div>
+        <div class="col-1">
+            <button type="button" class="btn btn-primary" (click)="salvar()">
+                Salvar
+            </button>
+        </div>
+    </div>
+    <br />
+    <div class="row mb-3">
+        <div class="col-2">
+            <label for="inputEmail4" class="form-label">Código da Origem</label>
+            <input type="text" maxlength="8" class="form-control" id="inputCodigoOrigem"
+                [(ngModel)]="origemAtual.codigoOrigem">
+        </div>
+        <div class="col">
+            <label for="inputEmail4" class="form-label">Nome</label>
+            <input type="text" class="form-control" [(ngModel)]="origemAtual.nomeOrigem">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-6">
+            <label for="inputEmail4" class="form-label">API Key</label>
+            <input type="text" class="form-control" id="inputCodigoOrigem" [(ngModel)]="origemAtual.apiKey">
+        </div>
+        <div class="col-6">
+            <label for="inputEmail4" class="form-label">Secret</label>
+            <input type="text" class="form-control" [(ngModel)]="origemAtual.apiSecret">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-2">
+            <label for="flexSwitchCheckDefault" class="form-label"></label>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                    [(ngModel)]="origemAtual.habilitado">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Habilitado</label>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Transações e Eventos</h5>
+                    <p class="card-text">Cadastre e edite transações e eventos para auxiliar na integração contábil.
+                    </p>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-link" data-bs-toggle="modal"
+                        data-bs-target="#modalTransacoesEventos">
+                        Configurar
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Contabilizações</h5>
+                    <p class="card-text">Configure as contabilizações para cada transação.</p>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-link" data-bs-toggle="modal"
+                        data-bs-target="#modalContabilizacoes">
+                        Configurar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Transações e Eventos -->
+<div class="modal fade" id="modalTransacoesEventos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="modalTransacoesEventosLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTransacoesEventosLabel">Configurar Transações e Eventos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h1 class="h5">Transações</h1>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="width: 60px;" scope="col"></th>
+                                    <th style="width: 100px;" scope="col">Código</th>
+                                    <th scope="col">Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let transacao of origemAtual.transacoes;"
+                                    (click)="carregarEventos(transacao)"
+                                    [class.table-primary]="transacao.codigoTransacao === transacaoAtual.codigoTransacao">
+                                    <th scope="row"><button class="page-link"
+                                            (click)="removerTransacao(transacao)">-</button></th>
+                                    <td>
+                                        <input type="text" maxlength="6" class="form-control" style="width: 100%;"
+                                            [(ngModel)]="transacao.codigoTransacao" />
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" style="width: 100%;"
+                                            [(ngModel)]="transacao.descricao" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><button class="page-link" (click)="adicionarTransacao()">+</button>
+                                    </th>
+                                    <td>
+                                        <input type="text" maxlength="6" class="form-control" style="width: 100%;"
+                                            [(ngModel)]="novaTransacao.codigoTransacao" />
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" style="width: 100%;"
+                                            [(ngModel)]="novaTransacao.descricao" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-6">
+                        <h1 class="h5">Eventos</h1>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="width: 60px;" scope="col"></th>
+                                    <th style="width: 100px;" scope="col">Código</th>
+                                    <th scope="col">Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let evento of transacaoAtual.eventos;">
+                                    <th scope="row"><button class="page-link" (click)="removerEvento(evento)">-</button>
+                                    </th>
+                                    <td>
+                                        <input type="text" maxlength="6" class="form-control" style="width: 100%;"
+                                            [(ngModel)]="evento.codigo" />
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" style="width: 100%;"
+                                            [(ngModel)]="evento.descricao" />
+                                    </td>
+                                </tr>
+                                <tr *ngIf="!(transacaoAtual.codigoTransacao == null)">
+                                    <th scope="row">
+                                        <button class="page-link" (click)="adicionarEvento()">+</button>
+                                    </th>
+                                    <td>
+                                        <input type="text" maxlength="6" class="form-control" style="width: 100%;"
+                                            [(ngModel)]="novoEvento.codigo" />
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" style="width: 100%;"
+                                            [(ngModel)]="novoEvento.descricao" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Contabilizações -->
+<div class="modal fade" id="modalContabilizacoes" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="modalContabilizacoesLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalContabilizacoesLabel">Configurar Contabilizações</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-3">
+                        <h1 class="h5">Transações</h1>
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr *ngFor="let transacao of origemAtual.transacoes;"
+                                    (click)="carregarEventos(transacao)"
+                                    [class.table-primary]="transacao.codigoTransacao === transacaoAtual.codigoTransacao">
+                                    <td>{{transacao.codigoTransacao}} - {{transacao.descricao}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-3">
+                        <h1 class="h5">Eventos</h1>
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr *ngFor="let evento of transacaoAtual.eventos;"
+                                    (click)="carregarContabilizacoes(evento)"
+                                    [class.table-primary]="evento.codigo === eventoAtual.codigo">
+                                    <td>{{evento.codigo}} - {{evento.descricao}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-6">
+                        <h1 class="h5">Contabilização</h1>
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr *ngFor="let contabilizacao of eventoContabilizacao;">
+                                    <td scope="row">
+                                        <button class="page-link"
+                                            (click)="removerContabilizacao(contabilizacao)">-</button>
+                                    </td>
+                                    <td style="width: 70%;">
+                                        <select class="form-select" [(ngModel)]="contabilizacao.contaContabil">
+                                            <option *ngFor="let conta of planoContas" value="{{conta.codigo}}"
+                                                [disabled]="!conta.contaAnalitica">{{conta.codigo}} -
+                                                {{conta.descricao}}</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="form-select" [(ngModel)]="contabilizacao.natureza">
+                                            <option value="0">I - Ignorar</option>
+                                            <option value="1">D - Debitar</option>
+                                            <option value="2">C - Creditar</option>
+                                            <option value="3">DC - Debitar se Entrada/Creditar se Saída</option>
+                                            <option value="4">CD - Creditar se Entrada/Debitar se Saída</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="!(eventoAtual.codigo == null)">
+                                    <td scope="row">
+                                        <button class="page-link" (click)="adicionarContabilizacao()">+</button>
+                                    </td>
+                                    <td style="width: 70%;">
+                                        <select class="form-select" [(ngModel)]="novaContabilizacao.contaContabil">
+                                            <option *ngFor="let conta of planoContas" value="{{conta.codigo}}"
+                                                [disabled]="!conta.contaAnalitica">{{conta.codigo}} -
+                                                {{conta.descricao}}</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="form-select" [(ngModel)]="novaContabilizacao.natureza">
+                                            <option value="0">I - Ignorar</option>
+                                            <option value="1">D - Debitar</option>
+                                            <option value="2">C - Creditar</option>
+                                            <option value="3">DC - Debitar se Entrada/Creditar se Saída</option>
+                                            <option value="4">CD - Creditar se Entrada/Debitar se Saída</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>

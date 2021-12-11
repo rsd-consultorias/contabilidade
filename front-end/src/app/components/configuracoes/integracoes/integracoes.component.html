@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Integrações</h1>
+</div>
+
+<div class="container">
+    <div>
+        <div class="btn-group" role="group">
+            <a class="nav-link" [routerLink]="['../']">
+                <span data-feather="home"></span>Voltar
+            </a>
+            <a class="nav-link" routerLink="nova">
+                <span data-feather="home"></span>Nova Integração
+            </a>
+        </div>
+    </div>
+    <br />
+    <div class="row row-cols-1 row-cols-3 g-1">
+        <ng-container *ngFor="let origem of origens;">
+            <div class="col">
+                <div class="card p-0 m-0 mb-2" style="padding: 16px;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{origem.codigoOrigem}}</h5>
+                        <p class="card-text">{{origem.nomeOrigem}}</p>
+                    </div>
+                    <div class="card-footer" [class.bg-success]="origem.habilitado"
+                        [class.bg-danger]="!origem.habilitado">
+                        <div class="row">
+                            <div class="col-6">
+                                <a class="btn-link text-white" [routerLink]="['editar', origem.codigoOrigem]">Editar</a>
+                            </div>
+                            <div class="col-6">
+                                <a class="btn-link text-white" href="#">Monitoramento</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

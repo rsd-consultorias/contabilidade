@@ -1,0 +1,18 @@
+export const constantes = {
+    ENFILEIRADO: 'ENFILEIRADO',
+    CANCELADO: 'CANCELADO',
+    CONTABILIZADO: 'CONTABILIZADO',
+    TODOS: 'TODOS',
+    
+    SQLITE_PATHDB: 'contabilidade.db',
+    
+    MONGO_DBNAME: 'contabilidade',
+    MONGO_COLLECTION_PLANOCONTAS: 'plano-contas',
+    MONGO_COLLECTION_LANCAMENTOS: 'lancamentos',
+    MONGO_COLLECTION_EMPRESAS: 'empresas',
+    MONGO_COLLECTION_CENTROS_CUSTOS: 'centros-custos',
+
+    HTTP_SUCESSO: 'SUCESSO',
+    HTTP_FALHA: 'FALHA',
+    HTTP_NAO_ENCONTRADO: 'NAO-ENCONTRADO'
+}

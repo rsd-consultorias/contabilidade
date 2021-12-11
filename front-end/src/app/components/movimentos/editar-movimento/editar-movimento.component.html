@@ -1,0 +1,134 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Editar Movimento</h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-1">
+            <button type="submit" class="btn btn-link" [routerLink]="['../']">Voltar</button>
+        </div>
+        <div class="col"></div>
+        <div class="col-1">
+            <button type="button" class="btn btn-primary" (click)="salvar()">
+                Salvar
+            </button>
+        </div>
+    </div>
+    <br />
+    <div class="row mb-3">
+        <div class="col-2">
+            <label for="inputEmail4" class="form-label">Competência / Dia</label>
+            <div class="input-group">
+                <span class="input-group-text">{{ano}}/{{mes}}/</span>
+                <select class="form-select text-right" [(ngModel)]="dia">
+                    <option *ngFor="let _dia of dias;">
+                        {{_dia}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-4">
+            <label for="inputEmail4" class="form-label">Lote</label>
+            <select class="form-select" [(ngModel)]="movimento.codigoLote">
+                <option *ngFor="let lote of lotes" value="{{lote.codigo}}">
+                    {{lote.codigo}} {{lote.descricao}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <label for="inputEmail4" class="form-label">Histórico</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="inputCodigoOrigem" [(ngModel)]="movimento.historico">
+                <button class="btn btn-outline-secondary" type="button">Pesquisar</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <label for="inputEmail4" class="form-label">Complemento</label>
+            <input type="text" class="form-control" [(ngModel)]="movimento.complemento">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <table class="table table-sm table-hover" style="cursor: pointer">
+                <thead>
+                    <th style="width: 42px;"></th>
+                    <th>Conta</th>
+                    <th>Valor</th>
+                    <th>Natureza</th>
+                    <th>Centro de Custos</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <button class="page-link" (click)="adicionar()">+</button>
+                        </td>
+                        <td style="width: 280px;">
+                            <select class="form-select" [(ngModel)]="novoEvento!.conta">
+                                <option *ngFor="let conta of planoContas" value="{{conta.codigo}}"
+                                    [disabled]="!conta.contaAnalitica" [class.text-primary]="conta.contaAnalitica"
+                                    [class.text-secondary]="!conta.contaAnalitica"
+                                    [class.text-info]="conta.contaAnalitica && conta.lancarPorCentroCustos">
+                                    {{conta.codigo}} {{conta.descricao}}</option>
+                            </select>
+                        </td>
+                        <td style="width: 220px;">
+                            <div class="input-group">
+                                <input type="text" class="form-control text-right"
+                                    [(ngModel)]="novoEvento!.valor!.formatado" appSomenteNumero appFormatarNumero>
+                                <span class="input-group-text">{{novoEvento!.valor!.moeda}}</span>
+                            </div>
+                        </td>
+                        <td style="width: 140px;">
+                            <select class="form-select" [(ngModel)]="novoEvento!.natureza">
+                                <option value="D">D Débito</option>
+                                <option value="C">C Crédito</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-select" [(ngModel)]="novoEvento!.centroCustos">
+                                <option *ngFor="let centroCustos of centrosCustos" value="{{centroCustos.codigo}}">
+                                    {{centroCustos.codigo}} {{centroCustos.descricao}}</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let evento of movimento!.contabilizacao;">
+                        <td style="width: 42px;">
+                            <button class="page-link" (click)="remover(evento)">-</button>
+                        </td>
+                        <td>
+                            <select class="form-select" [(ngModel)]="evento.conta" >
+                                <option *ngFor="let conta of planoContas" value="{{conta.codigo}}"
+                                    [disabled]="!conta.contaAnalitica" [class.text-primary]="conta.contaAnalitica"
+                                    [class.text-secondary]="!conta.contaAnalitica"
+                                    [class.text-info]="conta.contaAnalitica && conta.lancarPorCentroCustos">
+                                    {{conta.codigo}} {{conta.descricao}}</option>
+                            </select>
+                        </td>
+                        <td style="width: 120px;" class="text-right">
+                            <div class="input-group">
+                                <input type="text" class="form-control text-right"
+                                    [ngModel]="evento.valor.formatado | formatarNumero"
+                                    (ngModelChange)="evento.valor.formatado=$event" appSomenteNumero>
+                                <span class="input-group-text">{{evento!.valor!.moeda}}</span>
+                            </div>
+                        </td>
+                        <td style="width: 80px;">
+                            <select class="form-select" [(ngModel)]="evento.natureza" >
+                                <option value="D">D Débito</option>
+                                <option value="C">C Crédito</option>
+                            </select>
+                        </td>
+                        <td style="width: 260px;">
+                            <select class="form-select" [(ngModel)]="evento.centroCustos" >
+                                <option *ngFor="let centroCustos of centrosCustos" value="{{centroCustos.codigo}}">
+                                    {{centroCustos.codigo}} {{centroCustos.descricao}}</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,121 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+
+package rsdintegracoes;
+
+service RSDIntegracoes {
+    rpc adicionarTransacao(TransacaoRequest) returns (StandardResponse) {}
+    rpc cancelarTransacao(CancelTransacaoRequest) returns (StandardResponse) {}
+    rpc listarTransacoes(ListTransacoesRequest) returns (StandardResponse) {}
+    rpc confirmarEscrituracao(ConfirmarEscrituracaoRequest) returns (StandardResponse) {}
+    rpc inserirOrigem(Origem) returns (StandardResponse) {}
+    rpc alterarOrigem(Origem) returns (StandardResponse) {}
+    rpc buscarOrigem(OrigemRequest) returns (StandardResponse) {}
+    rpc listarOrigens(OrigemRequest) returns (StandardResponse) {}
+}
+
+message StandardResponse {
+    string status = 1;
+    optional string message = 2;
+    optional bytes body = 3;
+    optional string protocolo = 4;
+    optional int32 pagina = 5;
+    optional int32 quantidade = 6;
+}
+
+message TransacaoRequest {
+    string codigoOrigem = 1;
+    string data = 2;
+    string codigoTransacao = 3;
+    repeated Evento eventos = 4;
+    string historico = 5;
+    string centroCustos = 6;
+}
+
+message ConfirmarEscrituracaoRequest {
+    string protocolo = 1;
+    string protocoloContabilizacao = 2;
+}
+
+message Evento {
+    string codigo = 1;
+    float valor = 2;
+    string natureza = 3;
+}
+
+message CancelTransacaoRequest {
+    string codigoOrigem = 1;
+    string protocolo = 2;
+    string motivo = 3;
+}
+
+message ListTransacoesRequest {
+    string codigoOrigem = 1;
+    enum Status {
+        ENFILEIRADO = 0;
+        CANCELADO = 1;
+        CONTABILIZADO = 2;
+        TODOS = 3;
+        ERRO = 4;
+    }
+    optional Status status = 2;
+    optional int32 Pagina = 3;
+    optional int32 Quantidadeitens = 4;
+}
+
+message OrigemRequest {
+    string codigo = 1;
+}
+
+message Origem {
+    string codigoOrigem = 1;
+    string nomeOrigem = 2;
+    enum Acao {
+        HABILITAR = 0;
+        DESABILITAR = 1;
+        ALTERAR = 2;
+    }
+    Acao acao = 3;
+    repeated ConfiguracaoTransacao transacoes = 4;
+    bool habilitado = 5;
+    string apiKey = 6;
+    string apiSecret = 7;
+}
+
+message EventoContabilizacao {
+    string contaContabil = 1;
+    enum Natureza {
+        Entrada = 0;
+        Saida = 1;
+        Debito = 2;
+        Credito = 3;
+        DebitaEntradaCreditaSaida = 4;
+        DebitaSaidaCreditaEntrada = 5;
+    }
+    Natureza natureza = 2;
+}
+
+message ConfiguracaoEvento {
+    string codigo = 1;
+    string descricao = 2;
+    enum Natureza {
+        Entrada = 0;
+        Saida = 1;
+        Debito = 2;
+        Credito = 3;
+        DebitaEntradaCreditaSaida = 4;
+        DebitaSaidaCreditaEntrada = 5;
+    }
+    Natureza natureza = 3;
+    repeated EventoContabilizacao contabilizacao = 4;
+}
+
+message ConfiguracaoTransacao {
+    string codigo = 1;
+    string descricao = 2;
+    repeated ConfiguracaoEvento eventos = 3;
+}
+
+message OrigemLista {
+    repeated Origem origens = 1;
+}

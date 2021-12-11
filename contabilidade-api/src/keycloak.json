@@ -1,0 +1,8 @@
+{
+  "realm": "mercatorum-contabilidade",
+  "auth-server-url": "http://127.0.0.1:8080/auth/",
+  "ssl-required": "external",
+  "resource": "contabilidade",
+  "public-client": true,
+  "confidential-port": 0
+}

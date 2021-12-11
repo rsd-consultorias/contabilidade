@@ -1,0 +1,1 @@
+find '/Users/rafaeldias/Repositories/github/contabilidade/front-end/dist/front-end' -name '*.js*' -exec sed -i -e 's,"TESTEABC", TESTEABC,g' {} \;

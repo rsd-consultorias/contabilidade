@@ -1,0 +1,153 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Transações</h1>
+</div>
+
+<div class="container">
+    <div>
+        <a class="nav-link" routerLink="nova">
+            <span data-feather="home"></span>Transação Manual
+        </a>
+    </div>
+    <br />
+    <div class="table-responsive">
+        <table class="table table-sm table-hover" style="cursor: pointer">
+            <thead>
+                <th>Data</th>
+                <th>Origem</th>
+                <th>Transação</th>
+                <th>Descrição</th>
+                <th>Status</th>
+                <th>Protocolo</th>
+            </thead>
+            <tbody>
+                <tr *ngFor='let item of transacoes;' 
+                    (click)="editar(item)"
+                    [class.table-success]="item.status === 'CONTABILIZADO'"
+                    [class.table-warning]="item.status === 'ENFILEIRADO'"
+                    [class.text-danger]="item.status === 'ERRO'"
+                    [class.text-primary]="item.codigoOrigem === 'MANUAL'">
+                    <td style="width: 200px;">{{item.data}}</td>
+                    <td style="width: 120px;">{{item.codigoOrigem}}</td>
+                    <td style="width: 80px;">{{item.codigoTransacao}}</td>
+                    <td>{{item.historico}}</td>
+                    <td style="width: 100px;">{{item.status}}</td>
+                    <td style="width: 320px;">{{item.protocolo}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination" style="cursor: pointer;">
+                <li class="page-item" [ngClass]="{disabled: paginaAtual==1}"><a class="page-link"
+                        (click)="avancar(-1)">Anterior</a></li>
+                <li *ngFor='let i of quantidadePaginas; let pagina = index;' class="page-item"
+                    [ngClass]="{active: paginaAtual===i}"><a class="page-link" (click)="navegar(pagina + 1)">{{i}}</a>
+                </li>
+                <li class="page-item" [ngClass]="{disabled: paginaAtual==quantidadePaginas.length}"><a class="page-link"
+                        (click)="avancar(1);">Próximo</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<!-- Modal - Nova Transacao -->
+<div class="modal fade" id="novaTransacaoModal" tabindex="-1" role="dialog" aria-labelledby="novaTransacaoModalTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Transação Manual</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="inputTransacao">Transação</label>
+                        <input type="text" class="form-control" id="inputTransacao" placeholder="Transação">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress">Histórico</label>
+                    <input type="text" class="form-control" id="inputAddress" placeholder="Histórico">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="inputCity">Evento</label>
+                        <select id="inputCity" class="form-control">
+                            <option selected disabled>Selecione...</option>
+                            <option>001 - Despesa de Teste</option>
+                            <option>002 - Receita</option>
+                            <option>001 - Despesa</option>
+                            <option>002 - Receita</option>
+                            <option>001 - Despesa</option>
+                            <option>002 - Receita</option>
+                            <option>001 - Despesa</option>
+                            <option>002 - Receita</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputZip">Valor</label>
+                        <input type="text" class="form-control" style="text-align: right;" id="inputZip"
+                            placeholder="Ex: 123456">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputState">Natureza</label>
+                        <select id="inputState" class="form-control">
+                            <option selected disabled>Selecione...</option>
+                            <option>Entrada</option>
+                            <option>Saída</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-link">Incluir Evento</button>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover" style="cursor: pointer">
+                            <thead>
+                                <th>Evento</th>
+                                <th>Valor</th>
+                                <th>Natureza</th>
+                                <th>Ação</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="width: 200px;">002 - Despesa</td>
+                                    <td style="width: 120px;">1.234,56</td>
+                                    <td style="width: 80px;">SAÍDA</td>
+                                    <td style="width: 20px; text-align: center;">[-]</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 200px;">002 - Despesa</td>
+                                    <td style="width: 120px;">1.234,56</td>
+                                    <td style="width: 80px;">SAÍDA</td>
+                                    <td style="width: 20px; text-align: center;">[-]</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 200px;">002 - Despesa</td>
+                                    <td style="width: 120px;">1.234,56</td>
+                                    <td style="width: 80px;">SAÍDA</td>
+                                    <td style="width: 20px; text-align: center;">[-]</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 200px;">002 - Despesa</td>
+                                    <td style="width: 120px;">1.234,56</td>
+                                    <td style="width: 80px;">SAÍDA</td>
+                                    <td style="width: 20px; text-align: center;">[-]</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 200px;">002 - Despesa</td>
+                                    <td style="width: 120px;">1.234,56</td>
+                                    <td style="width: 80px;">SAÍDA</td>
+                                    <td style="width: 20px; text-align: center;">[-]</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>

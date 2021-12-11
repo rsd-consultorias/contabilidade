@@ -1,0 +1,118 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Dados Fiscais</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-1">
+            <button type="submit" class="btn btn-link" [routerLink]="['../']">Voltar</button>
+        </div>
+        <div class="col"></div>
+        <div class="col-1">
+            <button type="button" class="btn btn-primary" (click)="salvar()">
+                Salvar
+            </button>
+        </div>
+    </div>
+    <br />
+    <div class="row mb-5">
+        <div class="col-3">
+            <label for="inputEmail4" class="form-label">Tipo</label>
+            <select class="form-select" [(ngModel)]="dadosFiscais.tipoPessoa" (ngModelChange)="tipoPessoaSelected()">
+                <option value="PJ">Pessoa Jurídica</option>
+                <option value="PF">Pessoa Física</option>
+            </select>
+        </div>
+        <div class="col-3">
+            <label for="inputEmail4" class="form-label">{{labelCpfCnpj}}</label>
+            <input type="text" class="form-control" id="inputCodigoOrigem" [(ngModel)]="dadosFiscais.cpfCnpj">
+        </div>
+        <div class="col">
+            <label for="inputEmail4" class="form-label">{{labelNomeRazaoSocial}}</label>
+            <input type="text" class="form-control" [(ngModel)]="dadosFiscais.nomeRazaoSocial">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-4">
+            <label for="inputEmail4" class="form-label">UF</label>
+            <select class="form-select" [(ngModel)]="dadosFiscais.uf">
+                <option value="undefined">Selecione</option>
+                <option value="12">AC - Acre</option>
+                <option value="27">AL - Alagoas</option>
+                <option value="13">AM - Amazonas</option>
+                <option value="16">AP - Amapá</option>
+                <option value="29">BA - Bahia</option>
+                <option value="53">DF - Distrito Federal</option>
+                <option value="23">CE - Ceará</option>
+                <option value="32">ES - Espírito Santo</option>
+                <option value="52">GO - Goiás</option>
+                <option value="21">MA - Maranhão</option>
+                <option value="51">MT - Mato Grosso</option>
+                <option value="54">MS - Mato Grosso do Sul</option>
+                <option value="31">MG - Minas Gerais</option>
+                <option value="15">PA - Pará</option>
+                <option value="25">PB - Paraíba</option>
+                <option value="26">PE - Pernambuco</option>
+                <option value="41">PR - Paraná</option>
+                <option value="22">PI - Piauí</option>
+                <option value="33">RJ - Rio de Janeiro</option>
+                <option value="24">RN - Rio Grande do Norte</option>
+                <option value="43">RS - Rio Grande do Sul</option>
+                <option value="14">RR - Roraima</option>
+                <option value="11">RO - Rondônia</option>
+                <option value="42">SC - Santa Catarina</option>
+                <option value="35">SP - São Paulo</option>
+                <option value="28">SE - Sergipe</option>
+                <option value="17">TO - Tocantins</option>
+            </select>
+        </div>
+        <div class="col-4">
+            <label for="inputEmail4" class="form-label">Inscrição Estadual</label>
+            <input type="text" class="form-control" id="inputCodigoOrigem" [(ngModel)]="dadosFiscais.inscricaoEstadual">
+        </div>
+        <div class="col-4">
+            <label for="inputEmail4" class="form-label">Código IBGE Município</label>
+            <div class="input-group">
+                <input type="text" class="form-control" [(ngModel)]="dadosFiscais.codigoIbgeMunicipio">
+                <button class="btn btn-outline-secondary" type="button">Pesquisar</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-3">
+            <label for="inputEmail4" class="form-label">Inscrição Municipal</label>
+            <input type="text" class="form-control" [(ngModel)]="dadosFiscais.inscricaoMunicipal">
+        </div>
+        <div class="col-3">
+            <label for="inputEmail4" class="form-label">Situação Especial</label>
+            <input type="text" class="form-control" [(ngModel)]="dadosFiscais.codigoSituacaoEspecial">
+        </div>
+        <div class="col-6">
+            <label for="inputEmail4" class="form-label">Situação no Início do Período</label>
+            <select class="form-select" [(ngModel)]="dadosFiscais.indicadorSituacaoEspecial">
+                <option value="undefined">Selecione</option>
+                <option value="0">Normal (Início no primeiro dia do ano ou do mês)</option>
+                <option value="1">Abertura</option>
+                <option value="2">Resultante de cisão/fusão ou remanescente de cisão, ou realizou incorporação</option>
+                <option value="3">Início de obrigatoriedade da entrega da ECD no curso do ano calendário</option>
+            </select>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-6">
+            <label for="inputEmail4" class="form-label">Indicação NIRE</label>
+            <select class="form-select" [(ngModel)]="dadosFiscais.indicacaoNire">
+                <option value="undefined">Selecione</option>
+                <option value="0">Não possui NIRE (Empresa não possui registro na Junta Comercial)</option>
+                <option value="1">Possui NIRE (Empresa possui registro na Junta Comercial)</option>
+            </select>
+        </div>
+        <div class="col-4">
+            <label for="inputEmail4" class="form-label">Moeda Funcional</label>
+            <select class="form-select" [(ngModel)]="dadosFiscais.moedaFuncional.codigo">
+                <option value="BRL">Real Brasileiro</option>
+                <option value="USD">Dólar Estadunidense</option>
+            </select>
+        </div>
+    </div>
+</div>
