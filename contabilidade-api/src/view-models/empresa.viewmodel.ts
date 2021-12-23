@@ -1,6 +1,10 @@
-import { Empresa } from "core/entity/empresa.entity";
-import { AuditoriaDTO } from "../dto/auditoria.dto";
+import { Auditavel } from "../interfaces/auditavel.base";
 
-export class EmpresaVM extends Empresa {
-    auditoria?: AuditoriaDTO;
+export class EmpresaVM extends Auditavel<EmpresaVM> {
+    
+    constructor() {
+        super();
+    }
+
+    cnpj?: string;
 }

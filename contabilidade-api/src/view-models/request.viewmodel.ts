@@ -1,7 +1,6 @@
-import { AuditoriaDTO } from "../dto/auditoria.dto";
+import { Auditavel } from "../interfaces/auditavel.base";
 
 export class RequestVM<T> {
-    auditoria?: AuditoriaDTO;
     model?: T;
 }
 

@@ -24,12 +24,12 @@ export class EmpresaHandlers {
         res.json(response);
     }
 
-    async post(req: Request<RequestVM<Empresa>>, res: Response) {
-        let request: RequestVM<Empresa> = req.body as RequestVM<Empresa>;
-        let auditoria = request.auditoria;
+    async post(req: Request<EmpresaVM>, res: Response) {
+        let request: EmpresaVM = req.body as EmpresaVM;
         // @ts-ignore:next-line
-        auditoria.usuario = `${req.kauth.grant.access_token.content.preferred_username}:${req.kauth.grant.access_token.content.email}`;
-        let empresa: Empresa = request.model!;
+        request.usuario = `${req.kauth.grant.access_token.content.preferred_username}:${req.kauth.grant.access_token.content.email}`;
+        
+        let empresa: Empresa = request;
 
         let result = await this.empresaAplicacao.cadastrarEmpresa(empresa).then(fulfilled => {
             if (fulfilled.sucesso!) {
@@ -41,11 +41,11 @@ export class EmpresaHandlers {
     }
 
     async put(req: Request, res: Response) {
-        let request: RequestVM<Empresa> = req.body as RequestVM<Empresa>;
-        let auditoria = request.auditoria;
+        let request: EmpresaVM = req.body as EmpresaVM;
         // @ts-ignore:next-line
-        auditoria.usuario = `${req.kauth.grant.access_token.content.preferred_username}:${req.kauth.grant.access_token.content.email}`;
-        let empresa: Empresa = request.model!;
+        request.usuario = `${req.kauth.grant.access_token.content.preferred_username}:${req.kauth.grant.access_token.content.email}`;
+        
+        let empresa: Empresa = request;
 
         let response = await this.empresaRepositoryMongo.alterar(empresa)
             .then(fulfilled => {

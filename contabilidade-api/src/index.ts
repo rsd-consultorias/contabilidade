@@ -221,7 +221,6 @@ app.post(`/api/${API_VERSAO}/${spedContexto}`, keycloak.protect(OAUTH_ROLE_DEFAU
 app.listen(API_PORTA, async () => {
     // let a = keycloak.
 
-    // mongoClient = await MongoClient.connect('mongodb+srv://mercatorum:mercatorum@cluster0.rnzhd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
     mongoClient = await MongoClient.connect('mongodb://localhost:27017/contabilidade?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false');
 
     empresaRepositoryMongo = new EmpresaRepositoryMongo(mongoClient);
